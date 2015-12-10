@@ -8,7 +8,7 @@ var Simple = require('./app/models/simple');
 // configurations
 app.use(bodyParser.urlencoded({ extended : true }));
 app.use(bodyParser.json());
-mongoose.connect('mongodb://localhost:27017/pre-training');
+mongoose.connect('mongodb://jee:jee@apollo.modulusmongo.net:27017/M5idusog');
 
 // set port to use
 var port = process.env.PORT || 8080;
