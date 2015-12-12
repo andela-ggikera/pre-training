@@ -4,26 +4,12 @@ var express = require('express'),
 		bodyParser = require('body-parser');
 
 var mongoose = require('./app/models/simple');
+// get the model to describe the mongodb collection
 var Simple = mongoose.model('Simple');
-
-(function() {
-	simple = new Simple({ name : "Burayan Sama"})
-	simple.save(function(err) {
-		if (err) { console.log(err) }
-		else {
-			console.log(JSON.stringify(doc));
-		}
-	});
-})();
 
 // configurations
 app.use(bodyParser.urlencoded({ extended : true }));
 app.use(bodyParser.json());
-<<<<<<< Updated upstream
-mongoose.connect('mongodb://jee:jee@apollo.modulusmongo.net:27017/M5idusog');
-=======
-// connect to mongodb in mongolab
->>>>>>> Stashed changes
 
 // set port to use
 var port = process.env.PORT || 8080;
@@ -43,7 +29,7 @@ router.get('/', function(request, response) {
 });
 
 // RESTful API
-router.route('/simple')
+router.route('/simple/:name')
 	// POST a name to the collection
 	.post(function(request, response) {
 		// new instance of the simple model
@@ -57,15 +43,15 @@ router.route('/simple')
 			}
 			response.json({ message : 'CREATOR: Successfully added the name to the database!'})
 		})
-	})
+	});
+
 	// GET all the names from the model
-	.get(function(req,res) {
+	router.route('/simple').get(function(req,res) {
 			Simple.find(function(err, simples) {
 				if (err) {
 					res.json({ message: "Could not retrieve names!"});
 				}
-				res.json({ message: "Here are all the records in the database"})
-				res.send(simples);
+				res.json(simples);
 			});
 	 });
 // GET: one name associated to this id from the model
@@ -75,7 +61,6 @@ router.route('/simple/:simple_id')
 			if (err) {
 				res.send(err);
 			}
-			res.json({ message: "Found one name!"})
 			res.json(simple);
 		});
 	})
