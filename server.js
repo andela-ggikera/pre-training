@@ -1,14 +1,29 @@
 // packages we going to use
 var express = require('express'),
 		app = express(),
-		bodyParser = require('body-parser'),
-		mongoose = require('mongoose');
-var Simple = require('./app/models/simple');
+		bodyParser = require('body-parser');
+
+var mongoose = require('./app/models/simple');
+var Simple = mongoose.model('Simple');
+
+(function() {
+	simple = new Simple({ name : "Burayan Sama"})
+	simple.save(function(err) {
+		if (err) { console.log(err) }
+		else {
+			console.log(JSON.stringify(doc));
+		}
+	});
+})();
 
 // configurations
 app.use(bodyParser.urlencoded({ extended : true }));
 app.use(bodyParser.json());
+<<<<<<< Updated upstream
 mongoose.connect('mongodb://jee:jee@apollo.modulusmongo.net:27017/M5idusog');
+=======
+// connect to mongodb in mongolab
+>>>>>>> Stashed changes
 
 // set port to use
 var port = process.env.PORT || 8080;
@@ -24,45 +39,48 @@ router.use(function(request, response, next) {
 });
 
 router.get('/', function(request, response) {
-	response.json({ message: 'Welcome to the simple RESTful Api!'});
+	response.sendfile('app/views/index.html');
 });
 
 // RESTful API
 router.route('/simple')
-	// POST
+	// POST a name to the collection
 	.post(function(request, response) {
 		// new instance of the simple model
 		var simple = new Simple();
-		simple.name = request.body.name;
+		simple.name = request.params.name;
 
 		// save the model and handle any errors
 		simple.save(function(err) {
 			if (err) {
 				response.send('ERROR: ', err)
 			}
-			response.json({ message : 'CREATOR: Creation was a success!'})
+			response.json({ message : 'CREATOR: Successfully added the name to the database!'})
 		})
 	})
+	// GET all the names from the model
 	.get(function(req,res) {
 			Simple.find(function(err, simples) {
 				if (err) {
-					res.send(err);
+					res.json({ message: "Could not retrieve names!"});
 				}
+				res.json({ message: "Here are all the records in the database"})
 				res.send(simples);
 			});
 	 });
-// GET: the name associated to this id
+// GET: one name associated to this id from the model
 router.route('/simple/:simple_id')
 	.get(function(req, res) {
 		Simple.findById(req.params.simple_id, function(err, simple) {
 			if (err) {
 				res.send(err);
 			}
+			res.json({ message: "Found one name!"})
 			res.json(simple);
 		});
 	})
 
-	// PUT: update the simple
+	// PUT: update a given name associated to the id
 	.put(function(req, res) {
 		Simple.findById(req.params.simple_id, function(err, simple) {
 			if (err) {
