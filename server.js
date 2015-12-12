@@ -49,7 +49,7 @@ router.route('/simple/:name')
 	router.route('/simple').get(function(req,res) {
 			Simple.find(function(err, simples) {
 				if (err) {
-					res.json({ message: "Could not retrieve names!"});
+					res.json({ message: 'Could not retrieve names!'});
 				}
 				res.json(simples);
 			});
@@ -96,4 +96,4 @@ app.use('/api', router);
 
 // server listens on predefined port
 app.listen(port);
-console.log("Listening on port: " + port);
+console.log('Listening on port:' + port);
