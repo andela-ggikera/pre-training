@@ -16,3 +16,4 @@ A Simple RESTful API for Simple People! ;-D
   * PUT: ``` http://localhost:8080/api/< _id > ```
   * DELETE: ``` http://localhost:8080/api/< _id > ```
 
+5. For testing use jasmine-node to execute frisby: ``` jasmine-node spec/ ```
