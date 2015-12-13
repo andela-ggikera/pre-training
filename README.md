@@ -10,8 +10,9 @@ A Simple RESTful API for Simple People! ;-D
 ``` node server.js ```
 4. Play around with the restful API either using [Postman](https://chrome.google.com/webstore/search/postman) or a browser of your choice.
  	* ``` http://localhost:8080/api/ ``` For the home page
-  * POST : ``` http://localhost:8080/api/simple ```
+  * POST : ``` http://localhost:8080/api/simple/< your-name-with-spaces-or-not > ```
   * GET all: ``` http://localhost:8080/api/simple/ ```
-  * GET specific: ``` http://localhost:8080/api/simple<_id > ```
-  * PUT : ``` http://localhost:8080/api/<_id > ```
+  * GET specific: ``` http://localhost:8080/api/simple< _id > ```
+  * PUT: ``` http://localhost:8080/api/< _id > ```
+  * DELETE: ``` http://localhost:8080/api/< _id > ```
 
