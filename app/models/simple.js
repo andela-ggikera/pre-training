@@ -34,7 +34,7 @@ db.on('disconnected', function() {
 
 console.log('dbURI is: '+dbURI);
 mongoose.model('Simple', {
-    name : { type : String, default: ''}
+    name : { type : String, default: '', required: true}
 });
 
 // export mongoose to main server script

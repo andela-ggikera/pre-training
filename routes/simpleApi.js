@@ -14,12 +14,12 @@ router.use(function (request, response, next) {
 });
 
 // RESTful API
-router.route('/simple/:name')
+router.route('/simple')
     // POST a name to the collection
     .post(function (request, response) {
         // new instance of the simple model
         var simple = new Simple();
-        simple.name = request.params.name;
+        simple.name = request.body.name;
 
         // save the model and handle any errors
         simple.save(function (err) {
@@ -31,15 +31,36 @@ router.route('/simple/:name')
     });
 
 // GET all the names from the model
-router.route('/simple')
-    .get(function (req,res) {
-        Simple.find(function(err, simples) {
-            if (err) {
-                res.json({ message: 'Ooops: Could not retrieve names!'});
-            }
-            res.json(simples);
-        });
+router.route('/simple').get(function (req,res) {
+    Simple.find(function(err, simples) {
+        if (err) {
+            res.json({ message: 'Ooops: Could not retrieve names!'});
+        }
+        res.json(simples);
     });
+});
+
+// PUT: update a given name associated to the id
+router.route('/simple').put(function (req, res) {
+	var id = req.body._id;
+    Simple.update({ _id: id },
+    {
+    	$set: {
+    		name: req.body.name
+    	}
+    },
+    function (err) {
+     	if (err) {
+      		res.status(500).send({
+        		error: 'Could not update the user'
+      		});
+    	} else {
+      		res.status(200).send({
+        		message: 'Updated Successfully'
+      		});
+    	}
+    });
+});
 // GET: one name associated to this id from the model
 router.route('/simple/:simple_id')
     .get(function (req, res) {
@@ -51,20 +72,6 @@ router.route('/simple/:simple_id')
         });
     })
 
-    // PUT: update a given name associated to the id
-    .put(function (req, res) {
-        Simple.findById(req.params.simple_id, function (err, simple) {
-            if (err) {
-                res.send(err);
-            }
-            simple.save(function (err) {
-                if (err) {
-                    res.send({ message: 'Oops: Unable to edit the name'});
-                }
-                res.json({ message: 'PUTTER: Simple collection has been updated' });
-            })
-        })
-    })
     // DELETE: allow deletion of names
     .delete(function (req, res) {
         Simple.remove({
