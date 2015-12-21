@@ -1,28 +1,22 @@
+(function() {
 'use strict';
 
 angular.module('simple.services', [])
-.factory('SimpleApiService', ['$http', function($q, $http) {
+.factory('SimpleApiService', ['$q', '$http', function($q, $http) {
 	var apiUrl = '/api/simple/';
 
-	return {
-		get: get,
-		add: add,
-		edit: edit,
-		remove: remove
-	}
-
-	var get = function () {
+	var getNames = function () {
 		return $q(function (resolve, reject) {
 			$http.get(apiUrl).success(function (names) {
 				resolve(names);
 			})
 			.error(function (error) {
 				reject(error);
-			})
-		})
+			});
+		});
 	};
 
-	var add = function (name) {
+	var addName = function (name) {
 		return $q(function (resolve, reject) {
 			$http.post(apiUrl, name).success(function(name) {
 				resolve(name);
@@ -33,7 +27,7 @@ angular.module('simple.services', [])
 		});
 	};
 
-	var edit = function (name) {
+	var editName = function (name) {
 		return $q(function (resolve, reject) {
 			$http.put(apiUrl, name).success(function (result) {
 				resolve(result);
@@ -44,7 +38,7 @@ angular.module('simple.services', [])
 		});
 	};
 
-	var remove = function (id) {
+	var removeName = function (id) {
 		return $q(function (resolve,  reject) {
 			$http.delete(apiUrl + id).success(function (result) {
 				resolve(result);
@@ -54,4 +48,13 @@ angular.module('simple.services', [])
 			});
 		});
 	};
+
+	return {
+		getNames: getNames,
+		addName: addName,
+		editName: editName,
+		removeName: removeName
+	}
 }]);
+
+})();

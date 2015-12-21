@@ -4,11 +4,13 @@ angular
 
 	$scope.getNames = function($index) {
 		$scope.users = {};
-		SimpleApiService.get().then(function (results) {
+		SimpleApiService.getNames().then(function (results) {
 			console.log(results);
 			$scope.users.names = results;
 			$scope.selectName = results[$index];
 		})
 	}
+	$scope.selectName = {};
+	$scope.getNames(0);
 
 }]);
