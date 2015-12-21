@@ -30,17 +30,18 @@
 	</md-toolbar>
 
 	<md-content layout="row" layout-margin layout-padding>
-		<div flex="30">
-			<md-list class="list">
-				<md-subheader class="md-no-sticky">Names</md-subheader>
-				<md-list-item class="md-2-line" ng-repeat="user in users.names" ng-click="selectName(user)">
-					<div layout="column">
-						<h3>{{user.name}}</h3>
-					</div>
-				</md-list-item>
-			</md-list>
-		</div>
-
+		<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+			<div flex="100">
+				<md-list class="list">
+					<md-subheader class="md-no-sticky">Names</md-subheader>
+					<md-list-item class="md-2-line" ng-repeat="user in users.names" ng-click="selectName(user)">
+						<div layout="column">
+							<h3>{{user.name}}</h3>
+						</div>
+					</md-list-item>
+				</md-list>
+			</div>
+		</md-sidenav>
 		<div flex="70" layout="column" layou-fill layout-margin layout-padding>
 			<md-subheader class="md-no-sticky">
 			Details
