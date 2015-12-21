@@ -1,0 +1,51 @@
+<!-- public/index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <base href="/">
+    <title>Starter Node and Angular</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="libs/angular-material/angular-material.min.css">
+    <link rel="stylesheet" href="css/style.css"> <!-- custom styles -->
+
+    <!-- JS -->
+    <script src="libs/angular/angular.js"></script>
+    <script src="libs/angular-animate/angular-animate.min.js"></script>
+    <script src="libs/angular-material/angular-material.min.js"></script>
+    <script src="libs/angular-aria/angular-aria.min.js"></script>
+
+    <!-- ANGULAR CUSTOM  SCRIPTS-->
+    <script src="js/controllers.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/app.js"></script>
+</head>
+<body ng-app="simple" ng-controller="MainController">
+<div class="wrapper" layout="column" layout-fill>
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<div class="md-padding">Simple RESTful API</div>
+		</div>
+	</md-toolbar>
+
+	<md-content layout="row" layout-margin layout-padding>
+		<div flex="30">
+			<md-list class="list">
+				<md-subheader class="md-no-sticky">Names</md-subheader>
+				<md-list-item class="md-2-line" ng-repeat="name in simple.names" ng-click="selectName(simple)">
+					<div class="md-list-item-list" layout="column">
+						<h3>{{name}}</h3>
+					</div>
+				</md-list-item>
+			</md-list>
+		</div>
+
+		<div flex="70" layout="column" layou-fill layout-margin layout-padding>
+
+		</div>
+
+	</md-content>
+</div>
+</body>
+</html>
