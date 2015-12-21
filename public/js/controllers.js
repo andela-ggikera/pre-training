@@ -26,7 +26,7 @@ angular
 	$scope.saveUser = function () {
 		if ($scope.users.newUser) {
 			SimpleApiService.addName($scope.selectedName).then(function (results) {
-				$scope.getNames($scope.users.length - 1)
+				$scope.getNames($scope.users.length - 1);
 			})
 		}
 		else {

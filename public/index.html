@@ -51,7 +51,10 @@
                     <input type="text" ng-model="selectedName.name">
                 </md-input-container>
             </div>
-
+            <md-input-container>
+                <label>Speak your mind</label>
+                <textarea ng-model="selectedName.speak_your_mind"></textarea>
+            </md-input-container>
             <div layout="row">
                 <md-button class="md-raised md-primary" ng-click="createNewUser()" flex ng-disabled="users.newUser">New</md-button>
                 <md-button class="md-raised md-primary" ng-click="saveUser()" flex>Save</md-button>

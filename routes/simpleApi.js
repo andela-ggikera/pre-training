@@ -20,6 +20,7 @@ router.route('/simple')
         // new instance of the simple model
         var simple = new Simple();
         simple.name = request.body.name;
+        simple.speak_your_mind = request.body.speak_your_mind;
 
         // save the model and handle any errors
         simple.save(function (err) {
@@ -46,7 +47,8 @@ router.route('/simple').put(function (req, res) {
     Simple.update({ _id: id },
     {
     	$set: {
-    		name: req.body.name
+    		name: req.body.name,
+    		speak_your_mind: req.body.speak_your_mind
     	}
     },
     function (err) {
