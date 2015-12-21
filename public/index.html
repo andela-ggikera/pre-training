@@ -31,10 +31,13 @@
 
 	<md-content layout="row" layout-margin layout-padding>
 		<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+			<md-input-container flex>
+            	<input ng-model="search.who" placeholder="Search Name">
+           	</md-input-container>
 			<div flex="100">
 				<md-list class="list">
 					<md-subheader class="md-no-sticky">Names</md-subheader>
-					<md-list-item class="md-2-line" ng-repeat="user in users.names" ng-click="selectName(user)">
+					<md-list-item class="md-2-line" ng-repeat="user in users.names | filter:search.who" ng-click="selectName(user)">
 						<div layout="column">
 							<h3>{{user.name}}</h3>
 						</div>
@@ -58,7 +61,7 @@
             </md-input-container>
             <div layout="row">
                 <md-button class="md-raised md-primary" ng-click="createNewUser()" flex ng-disabled="users.newUser">New</md-button>
-                <md-button class="md-raised md-primary" ng-click="saveUser()" flex>Save</md-button>
+                <md-button class="md-raised md-accent" ng-click="saveUser()" flex>Save</md-button>
                 <md-button class="md-raised md-warn" ng-click="removeUser()" flex>Delete</md-button>
             </div>
 		</div>
